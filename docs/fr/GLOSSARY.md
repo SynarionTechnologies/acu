@@ -2,6 +2,9 @@
 
 - **Agrégat** : limite cohérente contenant entités et objets valeur.
 - **Projection** : modèle de lecture dérivé des événements.
+- **Événement** : enregistrement immuable décrivant quelque chose qui s'est produit.
+- **Relecture** : processus d'application des événements passés pour reconstruire l'état.
+- **Upcaster** : adaptateur mettant à niveau des événements d'anciens schémas.
 - **Magasin d'événements** : persistance des événements de domaine ordonnés.
 - **Commande** : requête de modification d'état du système.
 - **Requête** : requête de lecture de l'état du système.

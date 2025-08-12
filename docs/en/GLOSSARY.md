@@ -2,6 +2,9 @@
 
 - **Aggregate**: Consistent boundary containing entities and value objects.
 - **Projection**: Read model derived from events.
+- **Event**: Immutable record describing something that happened.
+- **Replay**: Process of applying past events to rebuild state.
+- **Upcaster**: Adapter that upgrades events from older schemas.
 - **Event Store**: Persistence for ordered domain events.
 - **Command**: Request to change system state.
 - **Query**: Request to read system state.

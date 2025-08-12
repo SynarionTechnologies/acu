@@ -1,0 +1,9 @@
+[package]
+name = "acu-agent"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+# To pin to a tag replace `branch` with `tag = "vX.Y.Z"`
+aei-framework = { git = "https://github.com/SynarionTechnologies/aei-framework", branch = "main" }
+uuid = { version = "1", features = ["v4"] }

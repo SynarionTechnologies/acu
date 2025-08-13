@@ -41,6 +41,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "acu-curiosity"
+version = "0.1.0"
+dependencies = [
+ "serde",
+ "thiserror",
+ "uuid",
+]
+
+[[package]]
 name = "acu-memory"
 version = "0.1.0"
 dependencies = [

@@ -41,6 +41,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "acu-memory"
+version = "0.1.0"
+dependencies = [
+ "acu-agent",
+ "chrono",
+ "serde",
+ "thiserror",
+ "toml",
+ "uuid",
+]
+
+[[package]]
 name = "aei-framework"
 version = "0.1.0"
 source = "git+https://github.com/SynarionTechnologies/aei-framework?branch=main#7203614bf0a0944f835c0351a3f5706040e827b0"

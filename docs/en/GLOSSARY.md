@@ -11,5 +11,7 @@
 - **Idempotency**: Property of producing the same result when executed multiple times.
 - **ULID/UUID**: Unique identifiers used for entities and events.
 - **Retention Policy**: Rules for keeping or deleting events over time.
+- **Compaction**: Physical cleanup of storage to reclaim space.
+- **Archiving**: Moving data from hot or warm storage to cold storage.
 - **Curiosity Policy**: Configures exploration behaviors of the agent.
 - **Safety Policy**: Guards against harmful actions.

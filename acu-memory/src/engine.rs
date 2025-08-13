@@ -1,6 +1,9 @@
+use acu_agent::events::{
+    memory::{MemoryCompacted, MemoryItemArchived, MemoryItemDeleted},
+    AcuEvent, EventMeta,
+};
 use chrono::{DateTime, Utc};
 use uuid::Uuid;
-use acu_agent::events::{AcuEvent, EventMeta, memory::{MemoryCompacted, MemoryItemArchived, MemoryItemDeleted}};
 
 use crate::config::RetentionConfig;
 
@@ -70,7 +73,11 @@ pub struct DefaultRetentionEngine<S: MemoryStore> {
 
 impl<S: MemoryStore> DefaultRetentionEngine<S> {
     pub fn new(config: RetentionConfig, store: S) -> Self {
-        Self { config, store, events: Vec::new() }
+        Self {
+            config,
+            store,
+            events: Vec::new(),
+        }
     }
 
     fn new_meta() -> EventMeta {
@@ -82,9 +89,8 @@ impl<S: MemoryStore> DefaultRetentionEngine<S> {
         let age_days = (now - item.last_accessed_at).num_days() as f32;
         let recency_factor = (-(age_days / ttl_days.max(1.0))).exp();
         let normalized_reward = item.reward.clamp(0.0, 1.0);
-        let normalized_ref_count = (item.reference_count as f32
-            / (1.0 + item.reference_count as f32))
-            .clamp(0.0, 1.0);
+        let normalized_ref_count =
+            (item.reference_count as f32 / (1.0 + item.reference_count as f32)).clamp(0.0, 1.0);
         let uniqueness_factor = item.uniqueness.clamp(0.0, 1.0);
         let w = &self.config.weights;
         let score = w.recency * recency_factor
@@ -109,24 +115,22 @@ impl<S: MemoryStore> RetentionEngine for DefaultRetentionEngine<S> {
             }
             let score = self.score(&item, now);
             if score < self.config.purge_threshold {
-                self.store
-                    .delete(&item.id)
-                    .map_err(EngineError::Store)?;
-                self.events.push(AcuEvent::MemoryItemDeleted(MemoryItemDeleted {
-                    meta: Self::new_meta(),
-                    item: item.id.clone(),
-                    reason: "expired".into(),
-                }));
+                self.store.delete(&item.id).map_err(EngineError::Store)?;
+                self.events
+                    .push(AcuEvent::MemoryItemDeleted(MemoryItemDeleted {
+                        meta: Self::new_meta(),
+                        item: item.id.clone(),
+                        reason: "expired".into(),
+                    }));
                 report.deleted += 1;
             } else {
-                self.store
-                    .archive(&item.id)
-                    .map_err(EngineError::Store)?;
-                self.events.push(AcuEvent::MemoryItemArchived(MemoryItemArchived {
-                    meta: Self::new_meta(),
-                    item: item.id.clone(),
-                    destination: "cold".into(),
-                }));
+                self.store.archive(&item.id).map_err(EngineError::Store)?;
+                self.events
+                    .push(AcuEvent::MemoryItemArchived(MemoryItemArchived {
+                        meta: Self::new_meta(),
+                        item: item.id.clone(),
+                        destination: "cold".into(),
+                    }));
                 report.archived += 1;
             }
         }
@@ -140,7 +144,9 @@ impl<S: MemoryStore> RetentionEngine for DefaultRetentionEngine<S> {
             store: "kv".into(),
             freed_space_bytes: freed,
         }));
-        Ok(CompactionReport { freed_space_bytes: freed })
+        Ok(CompactionReport {
+            freed_space_bytes: freed,
+        })
     }
 
     fn events(&self) -> &[AcuEvent] {

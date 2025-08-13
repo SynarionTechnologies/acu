@@ -57,7 +57,7 @@ fn computes_score_within_bounds() {
     let engine = DefaultRetentionEngine::new(cfg, store);
     let item = sample_item("1", 10, 0.5);
     let s = engine.score(&item, Utc::now());
-    assert!(s >= 0.0 && s <= 1.0);
+    assert!((0.0..=1.0).contains(&s));
 }
 
 #[test]

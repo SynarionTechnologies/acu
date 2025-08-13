@@ -52,4 +52,3 @@ pub struct MemoryRetentionPolicyChanged {
 pub struct MemoryReindexed {
     pub meta: EventMeta,
 }
-

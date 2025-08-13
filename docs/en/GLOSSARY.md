@@ -15,3 +15,6 @@
 - **Archiving**: Moving data from hot or warm storage to cold storage.
 - **Curiosity Policy**: Configures exploration behaviors of the agent.
 - **Safety Policy**: Guards against harmful actions.
+- **Curiosity**: Engine-driven exploration seeking new information.
+- **Exploration Strategy**: Technique used to gather information (e.g., web crawl, API query).
+- **Exploration Plan**: Scheduled task defining strategy and target for exploration.

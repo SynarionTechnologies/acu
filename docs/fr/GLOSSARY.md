@@ -15,3 +15,6 @@
 - **Archivage** : déplacement des données de la couche chaude ou tiède vers la couche froide.
 - **Politique de curiosité** : configure les comportements d'exploration de l'agent.
 - **Politique de sécurité** : protège contre les actions nuisibles.
+- **Curiosité** : exploration autonome du système à la recherche de nouvelles informations.
+- **Stratégie d'exploration** : technique utilisée pour collecter des données (web crawl, requête API).
+- **Plan d'exploration** : tâche planifiée définissant stratégie et cible d'exploration.

@@ -4,6 +4,7 @@ members = [
     "acu-agent",
     "acu-adapters",
     "acu-memory",
+    "acu-curiosity",
 ]
 resolver = "2"
 

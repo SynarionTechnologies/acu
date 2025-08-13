@@ -37,18 +37,18 @@ impl BlobStore for fs::FsBlobStore {
 #[cfg(feature = "s3")]
 impl BlobStore for s3::S3BlobStore {
     fn put(&self, key: &str, data: &[u8]) -> Result<String, BlobError> {
-        self.put(key, data)
+        s3::S3BlobStore::put(self, key, data)
     }
     fn get(&self, key: &str) -> Result<Vec<u8>, BlobError> {
-        self.get(key)
+        s3::S3BlobStore::get(self, key)
     }
     fn delete(&self, key: &str) -> Result<(), BlobError> {
-        self.delete(key)
+        s3::S3BlobStore::delete(self, key)
     }
     fn list(&self) -> Result<Vec<String>, BlobError> {
-        self.list()
+        s3::S3BlobStore::list(self)
     }
     fn exists(&self, key: &str) -> bool {
-        self.exists(key)
+        s3::S3BlobStore::exists(self, key)
     }
 }

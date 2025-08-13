@@ -27,3 +27,9 @@ impl S3BlobStore {
         false
     }
 }
+
+impl Default for S3BlobStore {
+    fn default() -> Self {
+        Self::new()
+    }
+}

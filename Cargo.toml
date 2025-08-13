@@ -3,6 +3,7 @@ members = [
     "acu-cli",
     "acu-agent",
     "acu-adapters",
+    "acu-memory",
 ]
 resolver = "2"
 
